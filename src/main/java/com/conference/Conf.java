@@ -1,12 +1,11 @@
 package com.conference;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.io.Serializable;
 
 /**
  * @author Evgeny Borisov
@@ -15,28 +14,32 @@ import java.util.Comparator;
 public class Conf {
 
     @Bean
-    public Comparator<String> stringComparator() {
-        return String::compareTo;
+    public Behavior<String> properBehavior() {
+        return new Good();
     }
 
-    @Bean
-    public Comparator<Double> doubleComparator() {
-        return Double::compareTo;
+    @Bean // Comment the method and you will have an error.
+    public Behavior<Serializable> delinquentBehavior() {
+        return new Bad();
     }
 
-    @Bean
-    public Comparator<Object> objectComparator() {
-        return (a,b) -> 0;
+    @Bean // Qualifier can be removed
+    public DelinquentSon<String> son1(@Qualifier("properBehavior") Behavior<String> behavior) {
+        return new DelinquentSon<>(behavior);
     }
 
-    @Bean
-    public Son<String> son(Comparator<String> comparator) {
-        return new Son<>(comparator);
+    @Bean // Qualifier can be removed
+    public GoodSon<String> son2(@Qualifier("properBehavior") Behavior<String> behavior) {
+        return new GoodSon<>(behavior);
     }
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Conf.class);
+        new AnnotationConfigApplicationContext(Conf.class);
+    }
 
-        Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
+    private static class Good implements Behavior<String> {
+    }
+
+    private static class Bad implements Behavior<Serializable> {
     }
 }

@@ -1,0 +1,12 @@
+##
+## IDEA descriptors
+##
+*.iml
+*.ipr
+*.iws
+.idea/
+
+##
+## Maven build artifacts
+##
+target/
