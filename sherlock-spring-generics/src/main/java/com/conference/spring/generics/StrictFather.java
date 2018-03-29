@@ -1,4 +1,4 @@
-package com.conference;
+package com.conference.spring.generics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

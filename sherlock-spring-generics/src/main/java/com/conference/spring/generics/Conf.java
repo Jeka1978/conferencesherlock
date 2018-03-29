@@ -1,4 +1,4 @@
-package com.conference;
+package com.conference.spring.generics;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,10 +18,10 @@ public class Conf {
         return new Good();
     }
 
-    @Bean // Comment the method and you will have an error.
-    public Behavior<Serializable> delinquentBehavior() {
-        return new Bad();
-    }
+//    @Bean // Comment the method and you will have an error.
+//    public Behavior<Serializable> delinquentBehavior() {
+//        return new Bad();
+//    }
 
     @Bean // Qualifier can be removed
     public DelinquentSon<String> son1(@Qualifier("properBehavior") Behavior<String> behavior) {

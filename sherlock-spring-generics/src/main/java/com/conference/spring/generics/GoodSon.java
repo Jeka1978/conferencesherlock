@@ -1,4 +1,4 @@
-package com.conference;
+package com.conference.spring.generics;
 
 import java.io.Serializable;
 

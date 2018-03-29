@@ -1,4 +1,4 @@
-package com.conference;
+package com.conference.spring.generics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +17,7 @@ public abstract class LenientFather<T> implements Father<T> {
 
     public void setBehavior(Behavior<T> behavior) {
 // Uncomment it only for the problem investigation
-//        System.out.println("I am '" + getClass().getSimpleName() + "' and I've been set '" + behavior.getClass().getSimpleName() + "' behavior");
+        System.out.println("I am '" + getClass().getSimpleName() + "' and I've been set '" + behavior.getClass().getSimpleName() + "' behavior");
 
         this.behavior = behavior;
     }
